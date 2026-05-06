@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+# Allow all crawlers full access to the site.
+
+User-agent: *
+Allow: /
+
+# Pre-render-friendly: point crawlers at the sitemap
+Sitemap: https://brewandsoul.com/sitemap.xml
