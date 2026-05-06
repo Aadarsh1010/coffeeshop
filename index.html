@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#3E2723" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- ─── Favicons & app icons ─── -->
+    <link rel="icon" type="image/svg+xml" href="/coffee.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- ─── Primary Meta Tags ─── -->
+    <title>Brew & Soul — Premium Artisan Coffee</title>
+    <meta name="title"       content="Brew & Soul — Premium Artisan Coffee" />
+    <meta name="description" content="Premium artisan coffee, hand-roasted daily in Brooklyn. Visit our cozy café for the perfect cup." />
+    <meta name="keywords"    content="coffee shop, brooklyn cafe, artisan coffee, espresso, latte, cold brew, brew and soul, specialty coffee" />
+    <meta name="author"      content="Brew & Soul" />
+    <meta name="robots"      content="index, follow" />
+
+    <link rel="canonical" href="https://brewandsoul.com/" />
+
+    <!-- ─── Open Graph / Facebook ─── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Brew & Soul" />
+    <meta property="og:title"       content="Brew & Soul — Premium Artisan Coffee" />
+    <meta property="og:description" content="Premium artisan coffee, hand-roasted daily in Brooklyn. Visit our cozy café for the perfect cup." />
+    <meta property="og:image"       content="https://brewandsoul.com/og-image.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Brew & Soul — Premium Artisan Coffee" />
+    <meta property="og:url"         content="https://brewandsoul.com/" />
+    <meta property="og:locale"      content="en_US" />
+
+    <!-- ─── Twitter ─── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Brew & Soul — Premium Artisan Coffee" />
+    <meta name="twitter:description" content="Premium artisan coffee, hand-roasted daily in Brooklyn." />
+    <meta name="twitter:image"       content="https://brewandsoul.com/og-image.png" />
+    <meta name="twitter:image:alt"   content="Brew & Soul — Premium Artisan Coffee" />
+    <meta name="twitter:site"        content="@brewandsoul" />
+    <meta name="twitter:creator"     content="@brewandsoul" />
+
+    <!-- ─── Performance: preconnect ─── -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google.com" />
+
+    <!-- Google Fonts (display=swap to avoid render blocking) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet" />
+
+    <!-- ─── Structured data: LocalBusiness (CafeOrCoffeeShop) ─── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "@id": "https://brewandsoul.com/#cafe",
+        "name": "Brew & Soul",
+        "description": "Premium artisan coffee, hand-roasted daily in Brooklyn.",
+        "image": "https://brewandsoul.com/og-image.png",
+        "url": "https://brewandsoul.com/",
+        "telephone": "+1-555-234-7891",
+        "email": "hello@brewandsoul.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "142 Maple Street",
+          "addressLocality": "Brooklyn",
+          "addressRegion": "NY",
+          "postalCode": "11201",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 40.6946,
+          "longitude": -73.9929
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "08:00", "closes": "22:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday"], "opens": "08:00", "closes": "20:00" }
+        ],
+        "priceRange": "$$",
+        "servesCuisine": "Coffee, Pastries",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "1247"
+        },
+        "sameAs": [
+          "https://instagram.com/brewandsoul",
+          "https://facebook.com/brewandsoul",
+          "https://twitter.com/brewandsoul"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding:2rem;font-family:system-ui;text-align:center;color:#3E2723;background:#FAF3E7">
+        <h1 style="font-size:1.5rem;margin-bottom:0.5rem">Brew &amp; Soul</h1>
+        <p>This website needs JavaScript enabled to work properly. Please enable it in your browser settings.</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f79038ddcfd4e29',t:'MTc3ODA4MTI5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

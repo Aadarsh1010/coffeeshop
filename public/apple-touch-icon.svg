@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#3E2723"/>
+      <stop offset="100%" stop-color="#2A1A14"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#FAF3E7"/>
+      <stop offset="60%" stop-color="#E2CDB0"/>
+      <stop offset="100%" stop-color="#A87E4F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0%"  stop-color="#E0C078"/>
+      <stop offset="100%" stop-color="#9A7209"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="180" height="180" rx="40" fill="url(#bg)"/>
+
+  <!-- steam -->
+  <g stroke="#FAF3E7" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M68 50 c 0 10, 10 10, 10 20 s -10 10, -10 20"/>
+    <path d="M90 45 c 0 10, 10 10, 10 20 s -10 10, -10 20"/>
+    <path d="M112 50 c 0 10, 10 10, 10 20 s -10 10, -10 20"/>
+  </g>
+
+  <!-- saucer -->
+  <ellipse cx="90" cy="148" rx="62" ry="9" fill="url(#cup)" stroke="url(#gold)" stroke-width="2"/>
+
+  <!-- handle -->
+  <path d="M132 95 q 26 -2 26 22 q 0 22 -26 20" fill="none" stroke="url(#cup)" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- cup body -->
+  <path d="M40 80 L140 80 L132 138 Q 90 152 48 138 Z" fill="url(#cup)" stroke="url(#gold)" stroke-width="2"/>
+
+  <!-- coffee surface -->
+  <ellipse cx="90" cy="80" rx="50" ry="8" fill="#3E2723"/>
+  <ellipse cx="90" cy="80" rx="50" ry="8" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+</svg>
