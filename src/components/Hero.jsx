@@ -4,34 +4,35 @@ import { ArrowRight, Calendar, ChevronDown, Star } from 'lucide-react'
 
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.16, delayChildren: 0.2 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 16 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
 }
 
 const fadeIn = {
   hidden: { opacity: 0 },
-  show:   { opacity: 1, transition: { duration: 1.2, ease: 'easeOut' } },
+  show:   { opacity: 1, transition: { duration: 0.3, ease: 'easeOut' } },
 }
 
 function FloatingCup({ reduceMotion }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.7, rotate: -8 }}
+      initial={{ opacity: 0, scale: 0.85, rotate: -6 }}
       animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.3, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       className="absolute right-4 sm:right-10 lg:right-20 top-1/2 -translate-y-1/2
                  w-40 sm:w-56 lg:w-72 xl:w-80 hidden md:block pointer-events-none
-                 drop-shadow-[0_25px_45px_rgba(0,0,0,0.55)] will-change-transform"
+                 drop-shadow-[0_25px_45px_rgba(0,0,0,0.55)]"
+      style={{ willChange: 'transform, opacity' }}
       aria-hidden="true"
     >
       <motion.div
         animate={reduceMotion ? {} : { y: [0, -14, 0], rotate: [0, 2, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="will-change-transform"
+        style={{ willChange: 'transform' }}
       >
         <svg viewBox="0 0 200 240" className="w-full h-auto">
           <defs>
@@ -71,6 +72,7 @@ function FloatingCup({ reduceMotion }) {
                 initial={{ opacity: 0, y: 15 }}
                 animate={reduceMotion ? { opacity: 0.4 } : { opacity: [0, 0.7, 0], y: [15, -25, -45] }}
                 transition={{ duration: 3, repeat: Infinity, delay: s.delay, ease: 'easeOut' }}
+                style={{ willChange: 'transform, opacity' }}
               />
             ))}
           </g>
@@ -109,13 +111,14 @@ export default function Hero() {
       aria-label="Welcome to Brew & Soul"
     >
       <motion.div
-        initial={{ scale: reduceMotion ? 1 : 1.12, opacity: 0 }}
+        initial={{ scale: reduceMotion ? 1 : 1.05, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0 -z-10 bg-cover bg-center will-change-transform"
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute inset-0 -z-10 bg-cover bg-center"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=80')",
+          willChange: 'transform, opacity',
         }}
         aria-hidden="true"
       />
@@ -178,7 +181,7 @@ export default function Hero() {
               <motion.svg
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.4, delay: 1.2, ease: 'easeInOut' }}
+                transition={{ duration: 0.6, delay: 0.5, ease: 'easeInOut' }}
                 viewBox="0 0 300 12"
                 className="absolute -bottom-2 sm:-bottom-3 left-0 w-full"
                 aria-hidden="true"
@@ -219,7 +222,7 @@ export default function Hero() {
                          transition-all duration-300 overflow-hidden"
             >
               <span aria-hidden="true" className="absolute inset-0 -translate-x-full group-hover:translate-x-full
-                               transition-transform duration-700 ease-out
+                               transition-transform duration-500 ease-out
                                bg-gradient-to-r from-transparent via-white/40 to-transparent" />
               <span className="relative">Explore Menu</span>
               <ArrowRight size={18} className="relative group-hover:translate-x-1 transition-transform" aria-hidden="true" />
@@ -259,9 +262,9 @@ export default function Hero() {
 
       <motion.a
         href="#main-content"
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.4, duration: 0.7 }}
+        transition={{ delay: 0.5, duration: 0.3 }}
         className="absolute bottom-5 sm:bottom-10 left-1/2 -translate-x-1/2
                    flex flex-col items-center gap-2 text-cream-100/75
                    hover:text-gold-500 transition-colors group z-20"

@@ -42,7 +42,14 @@ const photos = [
   { id: 21, cat: 'Events',     title: 'Anniversary brunch',    h: 'short', src: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=900&q=80' },
 ]
 
-const heightClasses = { short: 'row-span-1', tall: 'row-span-2', xtall: 'row-span-3' }
+// Row spans only kick in from `sm:` up (when we have 2+ columns).
+// On mobile (single column) every tile is the same uniform height
+// so the gallery reads as a clean, predictable vertical scroll.
+const heightClasses = {
+  short: 'sm:row-span-1',
+  tall:  'sm:row-span-2',
+  xtall: 'sm:row-span-3',
+}
 
 const igFeed = [
   { id: 'ig1', src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80', likes: 1240, comments:  87 },
@@ -66,7 +73,7 @@ function Tile({ photo, onOpen }) {
       whileHover={{ y: -4 }}
       className={`group relative overflow-hidden rounded-2xl bg-coffee-200 dark:bg-coffee-800
                   cursor-zoom-in shadow-warm hover:shadow-gold transition-shadow
-                  duration-300 ${heightClasses[photo.h] || 'row-span-1'}`}
+                  duration-300 ${heightClasses[photo.h] || ''}`}
       aria-label={`Open image: ${photo.title}`}
     >
       <LazyImage
@@ -251,8 +258,15 @@ export default function Gallery() {
             })}
           </div>
 
+          {/*  ────────── RESPONSIVE GRID ──────────
+               Phone   →  1 column  (clean vertical stack, ~280px tall tiles)
+               Tablet  →  2 columns (with masonry row spans)
+               Desktop →  3 columns (with masonry row spans)
+          */}
           <motion.div layout
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px] lg:auto-rows-[260px] gap-3 sm:gap-4 lg:gap-5">
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+                       auto-rows-[280px] sm:auto-rows-[220px] lg:auto-rows-[280px]
+                       gap-4 sm:gap-4 lg:gap-5">
             <AnimatePresence mode="popLayout">
               {filtered.map((photo) => <Tile key={photo.id} photo={photo} onOpen={openAt} />)}
             </AnimatePresence>

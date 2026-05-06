@@ -5,10 +5,6 @@ import PageWrapper from '../components/PageWrapper'
 import PageHeader from '../components/PageHeader'
 import { useSEO } from '../hooks/useSEO'
 
-/* ------------------------------------------------------------------ */
-/*  DATA                                                              */
-/* ------------------------------------------------------------------ */
-
 const categories = [
   { id: 'All',      label: 'All',         icon: Sparkles },
   { id: 'Hot',      label: 'Hot Drinks',  icon: Flame },
@@ -44,11 +40,12 @@ const items = [
   { id: 'chocolate-babka', name: 'Chocolate Babka',     category: 'Desserts', price: 5.25, desc: 'Slow-proofed sourdough babka braided with rich dark chocolate ganache.',          img: 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=800&q=80' },
 ]
 
-const grid = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } }
+// Reduced stagger: 0.06 → 0.05 (slightly tighter for snappier filter switching)
+const grid = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } }
 const card = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
-  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
-  exit:   { opacity: 0, y: -20, scale: 0.96, transition: { duration: 0.25, ease: 'easeIn' } },
+  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
+  exit:   { opacity: 0, y: -10, scale: 0.97, transition: { duration: 0.2, ease: 'easeIn' } },
 }
 
 function MenuImage({ src, alt, className = '' }) {
@@ -69,7 +66,7 @@ function MenuImage({ src, alt, className = '' }) {
         loading="lazy"
         decoding="async"
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700
+        className={`w-full h-full object-cover transition-all duration-300
                    ${loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}
                    group-hover:scale-110`}
       />
@@ -81,20 +78,20 @@ function FavoriteButton({ isFav, onClick, label }) {
   return (
     <motion.button
       onClick={onClick}
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.94 }}
       aria-pressed={isFav}
       aria-label={isFav ? `Remove ${label} from favorites` : `Add ${label} to favorites`}
-      className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-full
-                  text-sm font-medium border-2 transition-all duration-300 overflow-hidden
+      className={`relative inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-full
+                  text-sm font-semibold border-2 transition-all duration-300 overflow-hidden
                   ${isFav
                     ? 'bg-gold-500 border-gold-500 text-coffee-900 shadow-[0_8px_20px_-6px_rgba(201,169,97,0.55)]'
                     : 'bg-transparent border-coffee-200 dark:border-coffee-700 text-coffee-700 dark:text-cream-200 hover:border-gold-500 hover:text-gold-600'}`}
     >
       <motion.span
         key={isFav ? 'on' : 'off'}
-        initial={{ scale: 0.6, rotate: -20 }}
+        initial={{ scale: 0.8, rotate: -10 }}
         animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 380, damping: 14 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 18 }}
         className="relative"
       >
         <Heart size={16} fill={isFav ? 'currentColor' : 'none'} />
@@ -102,9 +99,9 @@ function FavoriteButton({ isFav, onClick, label }) {
           {isFav && (
             <motion.span
               initial={{ scale: 0, opacity: 0.6 }}
-              animate={{ scale: 2.5, opacity: 0 }}
+              animate={{ scale: 2.2, opacity: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.3 }}
               className="absolute inset-0 rounded-full bg-gold-500/40"
             />
           )}
@@ -122,32 +119,50 @@ function ItemCard({ item, isFav, onToggleFav }) {
       variants={card}
       exit="exit"
       whileHover={{ y: -6 }}
-      className="group bg-cream-50 dark:bg-coffee-800/60 rounded-2xl overflow-hidden border border-cream-200 dark:border-coffee-700
-                 shadow-warm hover:shadow-gold transition-shadow duration-300 flex flex-col"
+      style={{ willChange: 'transform' }}
+      className="group bg-cream-50 dark:bg-coffee-800/60 rounded-2xl overflow-hidden
+                 border border-cream-200 dark:border-coffee-700
+                 shadow-warm hover:shadow-gold transition-shadow duration-300
+                 flex flex-col h-full"
     >
-      <div className="relative">
-        <MenuImage src={item.img} alt={item.name} className="h-56 sm:h-60" />
-        <span className="absolute top-4 left-4 bg-coffee-900/80 backdrop-blur text-cream-50 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-semibold">
+      <div className="relative shrink-0">
+        <MenuImage src={item.img} alt={item.name} className="h-52 sm:h-56" />
+        <span className="absolute top-4 left-4 bg-coffee-900/80 backdrop-blur text-cream-50
+                         px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-semibold">
           {item.category === 'Hot'  && 'Hot Drink'}
           {item.category === 'Cold' && 'Cold Drink'}
           {item.category === 'Food' && 'Food'}
           {item.category === 'Desserts' && 'Dessert'}
         </span>
         {item.tag && (
-          <span className="absolute top-4 right-4 bg-gold-500 text-coffee-900 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold">
+          <span className="absolute top-4 right-4 bg-gold-500 text-coffee-900
+                           px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold">
             {item.tag}
           </span>
         )}
-        <div className="absolute -bottom-5 right-5 bg-coffee-800 text-gold-500 px-4 py-2 rounded-full font-serif font-bold text-lg shadow-warm border-2 border-cream-50 dark:border-coffee-900">
+        <div className="absolute -bottom-5 right-5 bg-coffee-800 text-gold-500
+                        px-4 py-2 rounded-full font-serif font-bold text-lg shadow-warm
+                        border-2 border-cream-50 dark:border-coffee-900">
           ${item.price.toFixed(2)}
         </div>
       </div>
+
       <div className="p-6 pt-7 flex flex-col flex-grow">
-        <h3 className="font-serif text-xl sm:text-2xl font-semibold text-coffee-800 dark:text-cream-50 mb-2">{item.name}</h3>
-        <p className="text-coffee-600/80 dark:text-cream-200/70 text-sm leading-relaxed mb-5 flex-grow">{item.desc}</p>
-        <div className="flex items-center justify-between gap-3 pt-4 border-t border-cream-200 dark:border-coffee-700">
+        <div className="flex-grow">
+          <h3 className="font-serif text-xl sm:text-2xl font-semibold text-coffee-800 dark:text-cream-50 mb-2">
+            {item.name}
+          </h3>
+          <p className="text-coffee-700 dark:text-cream-200/75 text-sm leading-relaxed line-clamp-3">
+            {item.desc}
+          </p>
+        </div>
+
+        <div className="mt-4 mb-3 text-xs text-coffee-500 dark:text-cream-200/60 italic">
+          Freshly made
+        </div>
+
+        <div className="pt-3 border-t border-cream-200 dark:border-coffee-700">
           <FavoriteButton isFav={isFav} onClick={onToggleFav} label={item.name} />
-          <span className="text-xs text-coffee-500 dark:text-cream-200/60 italic">Freshly made</span>
         </div>
       </div>
     </motion.article>
@@ -157,9 +172,10 @@ function ItemCard({ item, isFav, onToggleFav }) {
 function FeaturedCard({ isFav, onToggleFav }) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      style={{ willChange: 'transform, opacity' }}
       className="relative rounded-3xl overflow-hidden bg-coffee-900 text-cream-50
                  shadow-[0_30px_60px_-20px_rgba(42,26,20,0.6)] border border-coffee-700/60"
     >
@@ -172,9 +188,9 @@ function FeaturedCard({ isFav, onToggleFav }) {
           <div className="absolute inset-0 lg:hidden bg-gradient-to-t from-coffee-900 via-coffee-900/40 to-transparent" />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.7, rotate: -10 }}
+            initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
             animate={{ opacity: 1, scale: 1, rotate: -6 }}
-            transition={{ delay: 0.4, type: 'spring', stiffness: 200, damping: 15 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 250, damping: 18 }}
             className="absolute top-6 left-6 sm:top-8 sm:left-8"
           >
             <div className="relative">
@@ -182,6 +198,7 @@ function FeaturedCard({ isFav, onToggleFav }) {
                 animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
                 transition={{ duration: 2.4, repeat: Infinity, ease: 'easeOut' }}
                 className="absolute inset-0 rounded-full bg-gold-500/40 blur-md"
+                style={{ willChange: 'transform, opacity' }}
               />
               <div className="relative inline-flex items-center gap-2 bg-gold-500 text-coffee-900 px-4 py-2 rounded-full shadow-[0_10px_25px_-5px_rgba(201,169,97,0.7)] font-bold text-xs sm:text-sm uppercase tracking-widest">
                 <Award size={16} /> Chef's Pick
@@ -277,9 +294,10 @@ export default function Menu() {
             <AnimatePresence>
               {favorites.size > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/15 text-coffee-800 dark:text-cream-100 text-sm font-medium border border-gold-500/40"
                 >
                   <Heart size={14} fill="currentColor" className="text-gold-600" />
@@ -302,7 +320,7 @@ export default function Menu() {
                   {isActive && (
                     <motion.span
                       layoutId="tab-bg"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      transition={{ type: 'spring', stiffness: 500, damping: 36 }}
                       className="absolute inset-0 rounded-full bg-coffee-800 shadow-warm -z-10"
                     />
                   )}
@@ -325,7 +343,7 @@ export default function Menu() {
             variants={grid}
             initial="hidden"
             animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch"
           >
             <AnimatePresence mode="popLayout">
               {filtered.map((item) => (
